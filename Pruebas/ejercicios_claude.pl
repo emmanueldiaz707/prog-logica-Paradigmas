@@ -18,6 +18,9 @@ duplicar([X], [X,X]).
 duplicar([X|XS], [X,X|XS1]) :- duplicar(XS,XS1).
 
 % 5. invertir(Lista, ListaInvertida)
+% [1,2,3,4,5] -> [5,4,3,2,1]
+invertir([], []).
+invertir([X|XS], L) :- invertir(XS, L1), append(L1,[X],L).
 
 % 6. eliminar_elem(Elem, Lista, Resultado)
 % Eliminar primera ocurrencia de un elemento
