@@ -18,3 +18,7 @@ existe(X,[_|XS]) :- existe(X,XS).
 minimo([X],X).
 minimo([X|XS], X) :- minimo(XS,M), X=<M.
 minimo([X|XS], Y) :- minimo(XS,Y), Y<X.
+
+potencia(_B, 0, 1).
+potencia(B, N, R) :- N>0, N1 is N-1, potencia(B, N1, R1), R is R1*B.
+potencia(B, N, R) :- N<0, N1 is N+1, potencia(B,N1, R1), R is R1/B.
