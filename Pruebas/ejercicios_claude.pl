@@ -29,6 +29,9 @@ eliminar_elem(E,[E|XS],XS).
 eliminar_elem(E,[X|XS],[X|XS1]) :- E \= X, eliminar_elem(E,XS,XS1).
 
 % 7. contar_mayores(Lista, Umbral, Cantidad)
+contar_mayores([],_,0).
+contar_mayores([X|XS],N,C) :- X =< N, contar_mayores(XS,N,C).
+contar_mayores([X|XS],N,C) :- X > N, contar_mayores(XS, N, C1), C is C1+1.
 
 % 8. todos_positivos(Lista)
 % Verifica si todos los elementos de la lista son positivos
