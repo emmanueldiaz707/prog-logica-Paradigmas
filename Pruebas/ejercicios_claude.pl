@@ -24,6 +24,9 @@ invertir([X|XS], L) :- invertir(XS, L1), append(L1,[X],L).
 
 % 6. eliminar_elem(Elem, Lista, Resultado)
 % Eliminar primera ocurrencia de un elemento
+eliminar_elem(_,[],[]).
+eliminar_elem(E,[E|XS],XS).
+eliminar_elem(E,[X|XS],[X|XS1]) :- E \= X, eliminar_elem(E,XS,XS1).
 
 % 7. contar_mayores(Lista, Umbral, Cantidad)
 
