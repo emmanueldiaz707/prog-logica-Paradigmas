@@ -45,3 +45,29 @@
 
   R = [[6,2],[3,2,2],[2,1,3,1],[4,2,3,2],[8],[9,3,1]]
 */
+  % Caso base: no hay más elementos en la lista
+  nivel_elem(_,[],_,[]).
+
+  % Encuentra el elemento
+  nivel_elem(Elem, [Elem|MS], NivelActual, [NivelActual|RS]) :-
+     nivel_elem(Elem, MS, NivelActual, RS).
+
+  % El elemento no es el buscado. Continuar con el resto de la lista
+  nivel_elem(Elem, [M|MS], NivelActual, Resultado) :-
+     Elem \= M,
+     not(is_list(M)),
+     nivel_elem(Elem, MS, NivelActual, Resultado).
+     
+  % Se encontró una sublista. Buscar dentro de ella y en el resto de la lista.
+  nivel_elem(Elem, [M|MS], NivelActual, Resultado) :-
+     is_list(M),
+     Niv1 is NivelActual + 1,
+     nivel_elem(Elem, M, Niv1, Res1),
+     nivel_elem(Elem, MS, NivelActual, Res2),
+     append(Res1, Res2, Resultado).
+     
+  % Construir lista final
+  lista_niveles([],_,[]).
+  lista_niveles([L|LS], M, [[L|SublistaNiveles]|RS]) :-
+     nivel_elem(L, M, 1, SublistaNiveles),
+     lista_niveles(LS,M,RS).
