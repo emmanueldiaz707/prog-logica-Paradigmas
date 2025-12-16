@@ -10,8 +10,19 @@
    Resultado = [9, 8, 4, 3]
 */
 
-
-
+   lista_pos_mult(L, N, Resultado) :- lista_pos_mult(L, N, N, Resultado).
+   
+   lista_pos_mult([],_,_,[]).
+   
+   % Llega a posición múltiplo
+   lista_pos_mult([L|LS], N, 1, [L|RS]) :-
+      lista_pos_mult(LS, N, N, RS).
+   
+   % No está en posición múltiplo
+   lista_pos_mult([_|LS], N, M, R) :-
+      M>1,
+      M1 is M-1,
+      lista_pos_mult(LS, N, M1, R).
 /*
    Dada una lista con sublistas L, devolver una lista donde el iésimo elemento
    representa la sumatoria de los números contenidos en nivel i de profundidad de L.
