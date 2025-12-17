@@ -8,7 +8,20 @@
    R = [[3, 8, 2, 3], [1, 6, 9, 8], [12, 15]]
 */
   
-  
+   eliminar_p_sublista([],_,_,[]).
+
+   eliminar_p_sublista([X|XS], P, PActual, [X|RS]) :-
+      PActual\=P,
+      PSig is PActual + 1,
+      eliminar_p_sublista(XS, P, PSig, RS).
+      
+   eliminar_p_sublista([_|XS], P, P, XS).
+   
+   lista_sin_p([], _, []).
+
+   lista_sin_p([X|XS], P, [R|RS]) :-
+      eliminar_p_sublista(X, P, 1, R),
+      lista_sin_p(XS, P, RS).
   
 /*
    Escriba la función que tome como entrada una lista de pares ordenados y una lista de números (sin sublistas),
