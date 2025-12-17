@@ -16,3 +16,13 @@
      not(call(Condicion,X)),
      cantidad_de(XS,Condicion,Cant).
 
+
+%  41. Defina una función llamada “Select” que devuelva la lista de elementos que cumplen con una determinada condición.
+
+   select1([],_,[]).
+   select1([X|XS], Condicion, [X|RS]) :-
+      call(Condicion,X),
+      select1(XS,Condicion,RS).
+   select1([X|XS], Condicion, R) :-
+      not(call(Condicion,X)),
+      select1(XS,Condicion,R).
