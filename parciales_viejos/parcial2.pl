@@ -37,3 +37,37 @@
    Resultado        = [[3, 5], [6], [], [10]]
 */
 
+  maximo([X],X).
+  maximo([X|XS], X) :- maximo(XS,X1), X>X1.
+  maximo([X|XS], Y) :- maximo(XS, Y), Y>X.
+  
+
+  secuencia_aritmetica([A,_S],Max,[]) :- A>Max.
+  secuencia_aritmetica([_A,S],_Max,[]) :- S<0.
+  secuencia_aritmetica([A,S],_Max,[A]) :- S=0.
+  secuencia_aritmetica([A,S],Max,[A|RS]) :-
+     A =< Max,
+     S>0,
+     A1 is A+S,
+     secuencia_aritmetica([A1,S],Max,RS).
+     
+     
+  pertenece(X,[X|_]).
+  pertenece(X,[_|XS]) :- pertenece(X,XS).
+
+
+  filtrar_elementos([],_F,[]).
+  filtrar_elementos([X|XS], Filtro, [X|RS]) :-
+     pertenece(X,Filtro),
+     filtrar_elementos(XS, Filtro, RS).
+  filtrar_elementos([X|XS], Filtro, RS) :-
+     not(pertenece(X,Filtro)),
+     filtrar_elementos(XS,Filtro,RS).
+
+
+  lista_sec_arit([],_,[]).
+  lista_sec_arit([P|PS], Nros, [R|RS]) :-
+     maximo(Nros, Limite),
+     secuencia_aritmetica(P,Limite,Secuencia),
+     filtrar_elementos(Secuencia,Nros,R),
+     lista_sec_arit(PS,Nros,RS).
